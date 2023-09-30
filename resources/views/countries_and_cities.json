@@ -1,0 +1,26 @@
+{
+    "countries": [
+        {
+            "name": "United States",
+            "code": "US"
+        },
+        {
+            "name": "Canada",
+            "code": "CA"
+        }
+    ],
+    "cities": [
+        {
+            "name": "New York",
+            "country_id": 1
+        },
+        {
+            "name": "Los Angeles",
+            "country_id": 1
+        },
+        {
+            "name": "Toronto",
+            "country_id": 2
+        }
+    ]
+}
