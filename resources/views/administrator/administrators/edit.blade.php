@@ -49,12 +49,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-1">
-                                                <label class="form-label" for="last-name-column">Password</label>
-                                                <input value="$administrator->user->password" type="password" id="last-name-column" class="form-control" placeholder="Last Name" name="password">
-                                            </div>
-                                        </div>
+
                                         <div class="col-md-6">
                                             <label class="form-label" for="small-select-multi">Permissions</label>
                                             <div class="mb-1">
@@ -68,15 +63,15 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 mb-1">
-                                        <label class="form-label" for="basicSelect">Basic Select</label>
-                                        <select class="form-select" id="basicSelect" name="status_id">
-                                            <option value="{{ \App\Models\Status::ACTIVE }}" {{ $administrator->status_id === \App\Models\Status::ACTIVE ? 'selected' : '' }}>Active</option>
-                                            <option value="{{ \App\Models\Status::BLOCKED }}" {{ $administrator->status_id === \App\Models\Status::BLOCKED ? 'selected' : '' }}>Blocked</option>
-                                            <!-- Add more options as needed -->
-                                        </select>
-
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label" for="basicSelect">Basic Select</label>
+                                            <select class="form-select" id="basicSelect" name="status_id">
+                                                <option value="{{ \App\Models\Status::ACTIVE }}" {{ $administrator->status_id === \App\Models\Status::ACTIVE ? 'selected' : '' }}>Active</option>
+                                                <option value="{{ \App\Models\Status::BLOCKED }}" {{ $administrator->status_id === \App\Models\Status::BLOCKED ? 'selected' : '' }}>Blocked</option>
+                                                <!-- Add more options as needed -->
+                                            </select>
+    
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary ">Save</button>
                                 </form>

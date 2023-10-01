@@ -15,5 +15,14 @@ class Salesperson extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class, 'salesperson_countries', 'salesperson_id', 'country_id');
+    }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'salesperson_id');
+    }
+    
 
 }

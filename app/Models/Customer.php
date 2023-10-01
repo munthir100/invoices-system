@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,4 +17,8 @@ class Customer extends Model
         return $this->belongsTo(Salesperson::class);
     }
 
+    public function address()
+    {
+        return $this->hasOne(CustomerAddress::class);
+    }
 }

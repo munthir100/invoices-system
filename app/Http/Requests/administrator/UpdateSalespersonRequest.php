@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\administrator;
 
+use App\Models\Status;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSalepersonRequest extends FormRequest
+class UpdateSalespersonRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +25,19 @@ class CreateSalepersonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'password' => 'required|string|max:255',
+            'name' => 'string|max:255',
+            'email' => [
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($this->route('salesperson')->user->id),
+            ],
             'permissions' => [
-                'required',
                 'array',
-                Rule::in(Config::get('permissions.saleperson-permissions'))
+                Rule::in(Config::get('permissions.salesperson-permissions')),
+            ],
+            'status_id' => [
+                'required',
+                Rule::in([Status::ACTIVE, Status::BLOCKED]),
             ],
         ];
     }

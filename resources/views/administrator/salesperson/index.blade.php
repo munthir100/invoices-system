@@ -66,10 +66,10 @@
                                     </div>
                                 </form>
                             </div>
-                            <button class="dt-button create-new btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#createSaleperson">
+                            <button class="dt-button create-new btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#createSalesperson">
                                 <span>
                                     <i data-feather="plus"></i>
-                                    Create Saleperson
+                                    Create Salesperson
                                 </span>
                             </button>
                         </div>
@@ -86,19 +86,19 @@
                                 </thead>
 
                                 <tbody>
-                                    @if($salepersons->isEmpty())
+                                    @if($salespersons->isEmpty())
                                     <tr>
                                         <td colspan="100">
                                             <x-no-items-message />
                                         </td>
                                     </tr>
                                     @endif
-                                    @foreach($salepersons as $saleperson)
+                                    @foreach($salespersons as $salesperson)
                                     <tr>
-                                        <td>{{$saleperson->name}}</td>
-                                        <td>{{$saleperson->email}}</td>
+                                        <td>{{$salesperson->user->name}}</td>
+                                        <td>{{$salesperson->user->email}}</td>
                                         <td>
-                                            <x-status-badge :statusId="$saleperson->status_id" />
+                                            <x-status-badge :statusId="$salesperson->user->status_id" />
                                         </td>
                                         <td>
                                             <div class="dropdown">
@@ -110,18 +110,18 @@
                                                     </svg>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item text-primary" href="{{route('administrator.salepersons.edit',$saleperson->id)}}">
+                                                    <a class="dropdown-item text-primary" href="{{route('administrator.salespersons.edit',$salesperson->id)}}">
                                                         <i data-feather='edit-2' class="feather feather-edit-2 me-50"></i>
                                                         <span>Edit</span>
                                                     </a>
-                                                    <a class="dropdown-item text-danger delete-item" href="#" data-id="{{$saleperson->id}}">
+                                                    <a class="dropdown-item text-danger delete-item" href="#" data-id="{{$salesperson->id}}">
                                                         <i data-feather='trash-2' class="feather feather-trash me-50"></i>
                                                         <span>Delete</span>
                                                     </a>
                                                 </div>
                                             </div>
                                         </td>
-                                        <form action="{{route('administrator.salepersons.destroy',$saleperson->id)}}" data-id="{{$saleperson->id}}" method="post" hidden>
+                                        <form action="{{route('administrator.salespersons.destroy',$salesperson->id)}}" data-id="{{$salesperson->id}}" method="post" hidden>
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -145,15 +145,15 @@
 <!-- Basic Modals start -->
 
 <!-- Modal -->
-<div class="modal fade text-start" id="createSaleperson" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+<div class="modal fade text-start" id="createSalesperson" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel1">Create Saleperson</h4>
+                <h4 class="modal-title" id="myModalLabel1">Create Salesperson</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form" method="post" action="{{route('administrator.salepersons.store')}}">
+                <form class="form" method="post" action="{{route('administrator.salespersons.store')}}">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 col-12">
@@ -186,6 +186,16 @@
                             </div>
                         </div>
 
+                        <div class="col-12">
+                            <label class="form-label" for="countries">Countries</label>
+                            <div class="mb-1">
+                                <select name="countries[]" id="countries" class="select2-size-sm form-select" multiple="multiple" id="small-select-multi">
+                                    @foreach($countries as $country)
+                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

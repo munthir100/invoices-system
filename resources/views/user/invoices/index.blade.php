@@ -82,7 +82,7 @@
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Customer</th>
-                                        <th>Saleperson</th>
+                                        <th>Salesperson</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>

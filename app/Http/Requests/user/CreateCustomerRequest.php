@@ -25,20 +25,15 @@ class CreateCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => 'required|string|max:255',
+            'city_id' => 'required|exists:cities,id',
             'lang' => 'required',
             'lat' => 'required',
             'name' => 'required|string|max:255',
             'phone' => 'required|numeric',
             'type' => 'required|string|max:255',
             'language' => 'required|string|max:255',
-            'user_id' => [
-                'required',
-                Rule::exists('users', 'id')
-                    ->where(function ($query) {
-                        $query->where('role', 'saleperson')
-                            ->where('status_id', Status::ACTIVE);
-                    }),
+            'salesperson_id' => [
+                'required|exists:salespeople,id',
             ],
         ];
     }

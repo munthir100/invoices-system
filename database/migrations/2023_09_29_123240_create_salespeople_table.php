@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('salespeople', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 

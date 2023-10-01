@@ -311,15 +311,15 @@
                         </span>
                     </a>
                 </li>
-                <li class="{{ request()->is('salepersons*') ? 'active' : '' }}">
-                    <a class="d-flex align-items-center" href="{{route('administrator.salepersons.index')}}">
+                <li class="{{ request()->is('salespersons*') ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{route('administrator.salespersons.index')}}">
                         <i data-feather='truck'></i>
-                        <span class="menu-item text-truncate" data-i18n="Salepersons">
-                            Salepersons
+                        <span class="menu-item text-truncate" data-i18n="Salespersons">
+                            Salespersons
                         </span>
                     </a>
                 </li>
-                <li class=" navigation-header"><span data-i18n="Administrators &amp; Salepersons">Administrators &amp; Salepersons</span><i data-feather="more-horizontal"></i>
+                <li class=" navigation-header"><span data-i18n="Administrators &amp; Salespersons">Administrators &amp; Salespersons</span><i data-feather="more-horizontal"></i>
                 </li>
                 <li class="{{ request()->is('invoices*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="{{route('user.invoices.index')}}">

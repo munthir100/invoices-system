@@ -61,10 +61,10 @@
 
                                     <div class="row">
                                         <div class="col-md-6 col-12 mb-1">
-                                            <label class="form-label" for="saleperson">Select Saleperson</label>
-                                            <select class="saleperson-select form-select" name="user_id" id="select2-limited" multiple="multiple">
-                                                @foreach($salepersons as $saleperson)
-                                                <option value="{{$saleperson->id}}">{{$saleperson->name}}</option>
+                                            <label class="form-label" for="salesperson">Select Salesperson</label>
+                                            <select class="salesperson-select form-select" name="user_id" id="select2-limited" multiple="multiple">
+                                                @foreach($salespersons as $salesperson)
+                                                <option value="{{$salesperson->id}}">{{$salesperson->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

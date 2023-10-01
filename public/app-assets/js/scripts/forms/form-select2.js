@@ -13,7 +13,7 @@
     selectIcons = $('.select2-icons'),
     maxLength = $('.max-length'),
     singleSelect = $('.single-select'),
-    salepersonSelect = $('.saleperson-select'),
+    salespersonSelect = $('.salesperson-select'),
     customerSelect = $('.customer-select'),
     hideSearch = $('.hide-search'),
     selectArray = $('.select2-data-array'),
@@ -114,9 +114,9 @@
   });
 
 
-  salepersonSelect.wrap('<div class="position-relative"></div>').select2({
+  salespersonSelect.wrap('<div class="position-relative"></div>').select2({
     dropdownAutoWidth: true,
-    dropdownParent: salepersonSelect.parent(),
+    dropdownParent: salespersonSelect.parent(),
     width: '100%',
     maximumSelectionLength: 1,
   });

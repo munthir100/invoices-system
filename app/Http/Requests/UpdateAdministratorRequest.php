@@ -26,15 +26,18 @@ class UpdateAdministratorRequest extends FormRequest
     {
         return [
             'name' => 'string|max:255',
-            'email' => 'email|max:255',
-            'password' => 'required|string|max:255',
+            'email' => [
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($this->route('administrator')->user->id),
+            ],
             'permissions' => [
                 'array',
-                Rule::in(Config::get('permissions.administrator-permissions'))
+                Rule::in(Config::get('permissions.administrator-permissions')),
             ],
             'status_id' => [
                 'required',
-                Rule::in(Status::ACTIVE, Status::BLOCKED)
+                Rule::in([Status::ACTIVE, Status::BLOCKED]),
             ],
         ];
     }

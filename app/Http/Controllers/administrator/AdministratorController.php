@@ -24,16 +24,16 @@ class AdministratorController extends Controller
     {
         $adminCount = Administrator::count();
 
-        $salepersonCount = Salesperson::count();
+        $salespersonCount = Salesperson::count();
 
         $invoicesCount = Invoice::count();
 
-        return view('administrator.dashboard', compact('adminCount', 'salepersonCount', 'invoicesCount'));
+        return view('administrator.dashboard', compact('adminCount', 'salespersonCount', 'invoicesCount'));
     }
 
     public function index()
     {
-        $this->authorize('view-saleperson');
+        $this->authorize('view-administrator');
         $administrators = Administrator::with('user')->get();
         $permissions = Config::get('permissions.administrator-permissions', []);
         $countries = Country::all();
@@ -43,7 +43,7 @@ class AdministratorController extends Controller
     public function store(CreateAdministratorRequest $request)
     {
 
-        $this->authorize('create-saleperson');
+        $this->authorize('create-administrator');
         $data = $request->validated();
         $data['status_id'] = Status::ACTIVE;
         $data['user_type_id'] = UserType::ADMIN;
@@ -62,7 +62,7 @@ class AdministratorController extends Controller
      */
     public function show($userId)
     {
-        $this->authorize('view-saleperson');
+        $this->authorize('view-administrator');
         $administrator = User::whereRole('administrator')->findOrfail($userId);
 
         return view('administrator.administrators.show', compact('administrator'));
@@ -73,7 +73,7 @@ class AdministratorController extends Controller
      */
     public function edit(Administrator $administrator)
     {
-        $this->authorize('edit-saleperson');
+        $this->authorize('edit-administrator');
         $administrator = $administrator->load('user');
         $permissions = Permission::all();
         $selectedPermissions = $administrator->user->permissions->pluck('name')->toArray();
@@ -86,7 +86,7 @@ class AdministratorController extends Controller
      */
     public function update(UpdateAdministratorRequest $request, Administrator $administrator)
     {
-        $this->authorize('edit-saleperson');
+        $this->authorize('edit-administrator');
         $data = $request->validated();
         $user = $administrator->user;
         $user->update(Arr::except($data, 'permissions'));

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\InvoiceController;
 use App\Http\Controllers\user\CustomerController;
 use App\Http\Controllers\administrator\AuthController;
-use App\Http\Controllers\administrator\SalepersonController;
+use App\Http\Controllers\administrator\SalespersonController;
 use App\Http\Controllers\administrator\AdministratorController;
 
 /*
@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 
     Route::name('administrator.')->group(function(){
         Route::resource('administrators', AdministratorController::class);
-        Route::resource('salepersons', SalepersonController::class);
+        Route::resource('salespersons', SalespersonController::class);
     });
     Route::name('user.')->group(function(){
         Route::resource('invoices', InvoiceController::class);

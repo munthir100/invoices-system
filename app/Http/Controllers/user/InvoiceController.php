@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\user\CreateinvoiceRequest;
 use App\Http\Requests\user\UpdateinvoiceRequest;
 use App\Models\Customer;
+use App\Models\Salesperson;
 use App\Models\User;
 use App\Services\InvoiceService;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class InvoiceController extends Controller
     }
     public function index()
     {
-        request()->user()->hasPermission('view-invoice');
+        $this->authorize('view-invoice');
         $invoices = Invoice::all();
 
         return view('user.invoices.index', compact('invoices'));
@@ -30,13 +31,14 @@ class InvoiceController extends Controller
     public function create()
     {
         $customers = Customer::all();
-        $salepersons = User::whereRole('saleperson')->get();
-        return view('user.invoices.create', compact('customers', 'salepersons'));
+        $salespersons = Salesperson::with('user')->get();
+        
+        return view('user.invoices.create', compact('customers', 'salespersons'));
     }
 
     public function store(CreateinvoiceRequest $request)
     {
-        request()->user()->hasPermission('create-invoice');
+        $this->authorize('create-invoice');
         $data = $request->validated();
         $invoiceData = $this->invoiceService->getInvoiceData($data);
         $invoiceData['invoice_number'] = $this->invoiceService->generateInvoiceNumber();
@@ -55,7 +57,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        request()->user()->hasPermission('view-invoice');
+        $this->authorize('view-invoice');
 
         return view('user.invoices.show', compact('invoice'));
     }
@@ -65,7 +67,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        request()->user()->hasPermission('edit-invoice');
+        $this->authorize('edit-invoice');
 
         return view('user.invoices.edit', compact('invoice'));
     }
@@ -75,7 +77,7 @@ class InvoiceController extends Controller
      */
     public function update(UpdateinvoiceRequest $request, Invoice $invoice)
     {
-        request()->user()->hasPermission('edit-invoice');
+        $this->authorize('edit-invoice');
         $invoice->update($request->validated());
 
         return to_route('user.invoices.index')->with('success', 'invoice updated');

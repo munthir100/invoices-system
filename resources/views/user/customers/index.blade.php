@@ -98,7 +98,7 @@
                                     <tr>
                                         <td>{{$customer->name}}</td>
                                         <td>{{$customer->phone}}</td>
-                                        
+
                                         <td>{{$customer->type}}</td>
                                         <td>{{$customer->language}}</td>
 
@@ -157,7 +157,7 @@
             <div class="modal-body">
                 <div id="customerLocation" style="height: 300px;"></div>
 
-                <form class="form" method="post" action="{{route('user.customers.store')}}">
+                <form class="form" method="post" action="{{route('user.customers.store')}}" class="mb-2">
                     @csrf
                     <input required type="hidden" name="lat" id="lat">
                     <input required type="hidden" name="lang" id="lang">
@@ -185,6 +185,24 @@
                                 <input required type="tel" class="form-control" id="customer-phone" placeholder="phone" name="phone">
                             </div>
                         </div>
+
+                        <div class="col-md-6 col-12 mb-1">
+                            <label class="form-label" for="salesperson">Select Salesperson</label>
+                            <select class="single-select form-select" name="salesperson_id" id="select2-limited" multiple>
+                                @foreach($salespersons as $salesperson)
+                                <option value="{{$salesperson->id}}">{{$salesperson->user->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-12  mb-1">
+                            <label class="form-label" for="country">Select City</label>
+                            <select class="single-select form-select" name="city_id" id="single-select" multiple>
+                                @foreach($cities as $city)
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="col-md-6 col-12">
                             <div class="mb-1">
                                 <label class="form-label" for="customer-type">Customer Type</label>
@@ -198,15 +216,9 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-12 mb-1">
-                        <label class="form-label" for="saleperson">Select Saleperson</label>
-                            <select class="single-select form-select" name="user_id" id="select2-limited" multiple>
-                                @foreach($salepersons as $saleperson)
-                                <option value="{{$saleperson->id}}">{{$saleperson->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                      
+
+
+                        
 
                     </div>
                     <div class="modal-footer">

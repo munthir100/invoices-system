@@ -22,7 +22,7 @@ class UserFactory extends Factory
     {
         $permissions = array_merge(
             Config::get('permissions.administrator-permissions', []),
-            Config::get('permissions.saleperson-permissions', [])
+            Config::get('permissions.salesperson-permissions', [])
         );
 
             return [

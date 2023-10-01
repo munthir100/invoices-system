@@ -30,7 +30,7 @@
                         <div class="card">
 
                             <div class="card-body">
-                                <form action="{{route('administrator.salepersons.update',$saleperson->id)}}" method="post">
+                                <form action="{{route('administrator.salespersons.update',$salesperson->id)}}" method="post">
                                     @method('PUT')
 
                                     @csrf
@@ -39,13 +39,13 @@
                                         <div class="col-md-6">
                                             <div class="mb-1">
                                                 <label class="form-label" for="first-name-column">Name</label>
-                                                <input value="{{$saleperson->name}}" type="text" id="first-name-column" class="form-control" placeholder="First Name" name="name">
+                                                <input value="{{$salesperson->name}}" type="text" id="first-name-column" class="form-control" placeholder="First Name" name="name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-1">
                                                 <label class="form-label" for="last-name-column">Email</label>
-                                                <input value="{{$saleperson->email}}" type="text" id="last-name-column" class="form-control" placeholder="Last Name" name="email">
+                                                <input value="{{$salesperson->email}}" type="text" id="last-name-column" class="form-control" placeholder="Last Name" name="email">
                                             </div>
                                         </div>
 
@@ -58,7 +58,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label" for="small-select-multi">Permissions</label>
                                             <div class="mb-1">
-                                                <select value="{{$saleperson->permission}}" name="permissions[]" class="select2-size-sm form-select" multiple="multiple" id="small-select-multi">
+                                                <select value="{{$salesperson->permission}}" name="permissions[]" class="select2-size-sm form-select" multiple="multiple" id="small-select-multi">
                                                     @foreach($permissions as $permission)
 
                                                     <option value="{{$permission}}" selected>{{$permission}}</option>
@@ -70,8 +70,8 @@
                                     <div class="col-md-6 mb-1">
                                         <label class="form-label" for="basicSelect">Basic Select</label>
                                         <select class="form-select" id="basicSelect" name="status_id">
-                                            <option value="{{ \App\Models\Status::ACTIVE }}" {{ $saleperson->status_id === \App\Models\Status::ACTIVE ? 'selected' : '' }}>Active</option>
-                                            <option value="{{ \App\Models\Status::BLOCKED }}" {{ $saleperson->status_id === \App\Models\Status::BLOCKED ? 'selected' : '' }}>Blocked</option>
+                                            <option value="{{ \App\Models\Status::ACTIVE }}" {{ $salesperson->status_id === \App\Models\Status::ACTIVE ? 'selected' : '' }}>Active</option>
+                                            <option value="{{ \App\Models\Status::BLOCKED }}" {{ $salesperson->status_id === \App\Models\Status::BLOCKED ? 'selected' : '' }}>Blocked</option>
                                             <!-- Add more options as needed -->
                                         </select>
 

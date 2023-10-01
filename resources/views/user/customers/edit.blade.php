@@ -33,18 +33,26 @@
                             <form class="form" action="{{route('user.customers.update',$customer->id)}}" method="post">
                                 @csrf
                                 @method('put')
-                                <input type="text" id="lang" name="lang" value="{{$customer->address->lang}}">
-                                <input type="text" id="lat" name="lat" value="{{$customer->address->lat}}">
+                                <input hidden type="text" id="lang" name="lang" value="{{$customer->address->lang}}">
+                                <input hidden type="text" id="lat" name="lat" value="{{$customer->address->lat}}">
                                 <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <label class="form-label" for="country">Select City</label>
+                                        <select class="single-select form-select" name="city_id" id="single-select" multiple>
+                                            @foreach($cities as $city)
+                                            <option value="{{ $city->id }}" {{ $city->id == $customer->address->city_id ? 'selected' : '' }}>
+                                                {{ $city->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                     <div class="col-md-6 col-12">
                                         <div class="mb-1">
-                                            <label class="form-label" for="customer-address">Address</label>
-                                            <input required type="text" id="customer-address" class="form-control" placeholder="Address" value="{{$customer->address->name}}" name="address">
+                                            <label class="form-label" for="customer-name">Name</label>
+                                            <input required type="text" id="customer-name" class="form-control" placeholder="Name" value="{{$customer->address->name}}" name="address">
                                         </div>
                                     </div>
-
-
                                     <div class="col-md-6 col-12">
                                         <div class="mb-1">
                                             <label class="form-label" for="customer-name">Name</label>
@@ -72,12 +80,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-12 mb-1">
-                                        <label class="form-label" for="saleperson">Select Saleperson</label>
-                                        <select class="single-select form-select" name="user_id" id="select2-limited" multiple>
-                                        <option value="{{$customer->saleperson->id}}" selected>{{$customer->saleperson->name}}</option>
-                                            @foreach($salepersons as $saleperson)
-                                            <option value="{{$saleperson->id}}">{{$saleperson->name}}</option>
+                                    <div class="col-12 mb-1">
+                                        <label class="form-label" for="salesperson">Select Salesperson</label>
+                                        <select class="salesperson-select form-select" name="salesperson_id" id="select2-limited" multiple>
+                                            <option value="{{$customer->salesperson->id}}" selected>{{$customer->salesperson->user->name}}</option>
+                                            @foreach($salespersons as $salesperson)
+                                            <option value="{{$salesperson->id}}">{{$salesperson->user->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

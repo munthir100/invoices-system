@@ -30,7 +30,7 @@
                         <div class="card">
 
                             <div class="card-body">
-                                <form action="{{route('administrator.salepersons.update',$saleperson->id)}}" method="post">
+                                <form action="{{route('administrator.salespersons.update',$salesperson->id)}}" method="post">
                                     @method('PUT')
 
                                     @csrf
@@ -39,42 +39,55 @@
                                         <div class="col-md-6">
                                             <div class="mb-1">
                                                 <label class="form-label" for="first-name-column">Name</label>
-                                                <input value="{{$saleperson->name}}" type="text" id="first-name-column" class="form-control" placeholder="First Name" name="name">
+                                                <input value="{{$salesperson->user->name}}" type="text" id="first-name-column" class="form-control" placeholder="First Name" name="name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-1">
                                                 <label class="form-label" for="last-name-column">Email</label>
-                                                <input value="{{$saleperson->email}}" type="text" id="last-name-column" class="form-control" placeholder="Last Name" name="email">
+                                                <input value="{{$salesperson->user->email}}" type="text" id="last-name-column" class="form-control" placeholder="Last Name" name="email">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-1">
-                                                <label class="form-label" for="last-name-column">Password</label>
-                                                <input type="password" id="last-name-column" class="form-control" placeholder="Last Name" name="password">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
+                                        
+                                        <div class="col-md-12">
                                             <label class="form-label" for="small-select-multi">Permissions</label>
                                             <div class="mb-1">
-                                                <select value="{{$saleperson->permission}}" name="permissions[]" class="select2-size-sm form-select" multiple="multiple" id="small-select-multi">
+                                                <select value="{{$salesperson->permission}}" name="permissions[]" class="select2-size-sm form-select" multiple="multiple" id="small-select-multi">
                                                     @foreach($permissions as $permission)
-
-                                                    <option value="{{$permission}}" selected>{{$permission}}</option>
+                                                    <option value="{{ $permission->name }}" {{ in_array($permission->name, $selectedPermissions) ? 'selected' : '' }}>
+                                                        {{ $permission->name }}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-1">
-                                        <label class="form-label" for="basicSelect">Basic Select</label>
-                                        <select class="form-select" id="basicSelect" name="status_id">
-                                            <option value="{{ \App\Models\Status::ACTIVE }}" {{ $saleperson->status_id === \App\Models\Status::ACTIVE ? 'selected' : '' }}>Active</option>
-                                            <option value="{{ \App\Models\Status::BLOCKED }}" {{ $saleperson->status_id === \App\Models\Status::BLOCKED ? 'selected' : '' }}>Blocked</option>
-                                            <!-- Add more options as needed -->
-                                        </select>
+                                    <div class="row">
 
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label" for="basicSelect">Basic Select</label>
+                                            <select class="form-select" id="basicSelect" name="status_id">
+                                                <option value="{{ \App\Models\Status::ACTIVE }}" {{ $salesperson->status_id === \App\Models\Status::ACTIVE ? 'selected' : '' }}>Active</option>
+                                                <option value="{{ \App\Models\Status::BLOCKED }}" {{ $salesperson->status_id === \App\Models\Status::BLOCKED ? 'selected' : '' }}>Blocked</option>
+                                                <!-- Add more options as needed -->
+                                            </select>
+    
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="countries">Countries</label>
+                                            <div class="mb-1">
+                                                
+                                            <select name="countries[]" id="countries" class="select2-size-sm form-select" multiple="multiple" id="small-select-multi">
+    @foreach($countries as $country)
+        <option value="{{ $country->name }}" {{ in_array($country->name, $selectedCountries) ? 'selected' : '' }}>
+            {{ $country->name }}
+        </option>
+    @endforeach
+</select>
+
+                                            </div>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary ">Save</button>
                                 </form>

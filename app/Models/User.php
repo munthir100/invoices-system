@@ -73,7 +73,7 @@ class User extends Authenticatable
     }
     public function salesperson()
     {
-        return $this->hasOne(Administrator::class);
+        return $this->hasOne(Salesperson::class);
     }
 
     // scopes
